@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Old Freshchat Widget Test</title>
+</head>
+<body>
+  <h1>Testing Old Freshchat Widget</h1>
+  <script>
+  window.prechatTemplate = {
+    SubmitLabel: "Start Chat",
+    heading: "Chat with Us",
+    mainbgColor: "#9ac042",       // Header and button background
+    maintxColor: "#FFFFFF",       // Header text and label color
+    buttonBgColor: "#0AA4DB",     // Submit button background
+    buttonColor: "#FFFFFF",       // Submit button text
+    fieldbgColor: "#FFFFFF",      // Input field background
+    fieldtxColor: "#000000",      // Input field text
+    textBanner: "We're excited to help! To begin, please provide your name and email so we can better assist you.",
+    fields: {
+      1: {
+        error: "Please enter a valid name",
+        fieldId: "name",
+        label: "Name",
+        required: true,
+        type: "text"
+      },
+      2: {
+        error: "Please enter a valid email",
+        fieldId: "email",
+        label: "Email",
+        required: true,
+        type: "email"
+      }
+    }
+  };
+
+  window.fcSettings = {
+    onInit: function () {
+      try {
+        // Clear any existing user session
+        window.fcWidget.user.clear();
+
+        // Initialize the pre-chat form with the updated template
+        window.fcPreChatform.fcWidgetInit(window.prechatTemplate);
+      } catch (error) {
+        console.error("Freshchat widget initialization error:", error);
+      }
+    }
+  };
+
+  window.fcWidgetMessengerConfig = {
+    config: {
+      content: {
+        actions: {
+          tab_chat: "Chat"
+        },
+        headers: {
+          chat: "Chat With Us"
+        }
+      },
+      cssNames: {
+        expanded: "custom_fc_expanded",
+        widget: "custom_fc_frame"
+      }
+    }
+  };
+</script>
+
+<!-- Pre-chat form script -->
+<script src="https://snippets.freshchat.com/js/fc-pre-chat-form-v2.js"></script>
+
+<!-- Freshchat main widget script (with secure protocol) -->
+<script src="https://fw-cdn.com/13466810/5535894.js" chat="true"></script>
+
+</body>
+</html>
