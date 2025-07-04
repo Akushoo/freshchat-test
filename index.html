@@ -2,17 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Freshchat Widget Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #cc0000;
+    }
+  </style>
 </head>
 <body>
-  <h2>Testing Freshchat Widget</h2>
+  <h1>Testing: Freshchat Widget (Persistent)</h1>
+  <p>This page includes the updated Freshchat widget for testing. Try refreshing the page — the chat should remain visible and retain session data unless the browser tab is closed.</p>
 
   <script>
     window.prechatTemplate = {
       SubmitLabel: "Start Chat",
       heading: "Chat with Us",
-      mainbgColor: "#9ac042",
+      mainbgColor: "#cc0000",       // Red header for testing
       maintxColor: "#FFFFFF",
       buttonBgColor: "#0AA4DB",
       buttonColor: "#FFFFFF",
@@ -24,7 +34,6 @@
           error: "Please enter a valid name",
           fieldId: "name",
           label: "Name",
-          placeholder: "Enter your name",
           required: true,
           type: "text"
         },
@@ -32,7 +41,6 @@
           error: "Please enter a valid email",
           fieldId: "email",
           label: "Email",
-          placeholder: "Enter your email",
           required: true,
           type: "email"
         }
@@ -46,10 +54,9 @@
       },
       onInit: function () {
         try {
-          // window.fcWidget.user.clear(); // Commented out to avoid reset on refresh
           window.fcPreChatform.fcWidgetInit(window.prechatTemplate);
-        } catch (error) {
-          console.error("Freshchat widget initialization error:", error);
+        } catch (e) {
+          console.error("Freshchat init error:", e);
         }
       }
     };
@@ -57,12 +64,8 @@
     window.fcWidgetMessengerConfig = {
       config: {
         content: {
-          actions: {
-            tab_chat: "Chat"
-          },
-          headers: {
-            chat: "Chat With Us"
-          }
+          actions: { tab_chat: "Chat" },
+          headers: { chat: "Chat With Us" }
         },
         cssNames: {
           expanded: "custom_fc_expanded",
@@ -72,10 +75,9 @@
     };
   </script>
 
-  <!-- Pre-chat form script -->
+  <!-- Pre-chat form -->
   <script src="https://snippets.freshchat.com/js/fc-pre-chat-form-v2.js"></script>
-
-  <!-- Freshchat main widget script (with secure protocol) -->
+  <!-- Freshchat main widget -->
   <script src="https://fw-cdn.com/13466810/5535894.js" chat="true"></script>
 </body>
 </html>
